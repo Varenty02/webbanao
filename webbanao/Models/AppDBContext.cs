@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
 namespace webbanao.Models
 {
 
@@ -36,7 +35,7 @@ namespace webbanao.Models
             //}
 
         }
-        public DbSet<Good> Goods { get; set; }
+        public DbSet<ContactModel> Contacts { get; set; }
 
 
     }

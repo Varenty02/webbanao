@@ -1,0 +1,59 @@
+﻿@{
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    var message = TempData["StatusMessage"] as string;
+    bool status = false;
+    if (TempData["StatusAlert"] != null && TempData["StatusAlert"] is bool)
+    {
+        status = (bool)TempData["StatusAlert"];
+    }
+}
+@if (!string.IsNullOrEmpty(message))
+{
+    if (status)
+    {
+        <script type="text/javascript">
+        toastr.options = {
+            "closeButton": false,
+            "newestOnTop": false,
+            "progressBar": true,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        }
+        toastr.success('@message')
+        </script>
+
+    }
+    else
+    {
+        <script type="text/javascript">
+        toastr.options = {
+            "closeButton": false,
+            "newestOnTop": false,
+            "progressBar": true,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        }
+        toastr.error('@message')
+        </script>
+    }
+}
+

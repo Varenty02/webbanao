@@ -1,0 +1,52 @@
+﻿@using Microsoft.EntityFrameworkCore
+@using System.Data
+@inject AppDBContext dbContext
+@{
+    ViewData["Title"] = "Thông tin database";
+    var connect = dbContext.Database.GetDbConnection();
+    var dbname = connect.Database;
+    var can_connect = dbContext.Database.CanConnect();
+}
+<partial name="_AlertMessage" />
+<h1>Thông tin cơ sở dữ liệu</h1>
+<p>Database:@dbname</p>
+<p>Source:@connect.DataSource</p>
+<p>State:@connect.State</p>
+<h1>Migration pending</h1>
+@foreach (var migration in dbContext.Database.GetPendingMigrations())
+{
+    <p>@migration</p>
+}
+<h1>Migration applying</h1>
+@foreach (var migration in dbContext.Database.GetAppliedMigrations())
+{
+    <p>@migration</p>
+}
+
+
+@if (!can_connect)
+{
+    <p class="alert-danger alert">Không có khả năng kết nối database</p>
+}
+@if (can_connect)
+{
+    <h2>Các table</h2>
+    await dbContext.Database.OpenConnectionAsync();
+    var table = dbContext.Database.GetDbConnection().GetSchema("Tables");
+    <ul>
+        @foreach (DataRow row in table.Rows)
+        {
+            <li>@row["TABLE_NAME"]</li>
+        }
+    </ul>
+    <a class="btn btn-danger" asp-action="DeleteDb">Xóa Database:@dbname</a>
+}
+
+
+@if (dbContext.Database.GetPendingMigrations().Any()) 
+{ 
+<form method="post">
+    <button type="submit" class="btn btn-success" asp-action="CreateDb">Tạo database</button>
+</form>
+    
+}

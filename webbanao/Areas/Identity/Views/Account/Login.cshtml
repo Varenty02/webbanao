@@ -21,6 +21,7 @@
     body {
         font-family: 'Poppins', sans-serif;
         background: #ececec !important;
+        margin-bottom:0 !important;
     }
     /*------------ Login container ------------*/
     .box-area {
@@ -53,8 +54,8 @@
             <div class="featured-image mb-3">
                 <img src="~/images/1.jpg" class="img-fluid" style="width: 500px;">
             </div>
-            <p class="text-white fs-2" style="font-family: 'Courier New', Courier, monospace; font-weight: 600;">Đăng nhập</p>
-            <small class="text-white text-wrap text-center" style="width: 17rem;font-family: 'Courier New', Courier, monospace;">Để có thể trải nghiệm hết dịch vụ của chúng tôi</small>
+            <p class="mb-0 text-white fs-2" style="font-family: 'Courier New', Courier, monospace; font-weight: 600;">Đăng nhập</p>
+            <p class="mb-0 text-white text-wrap text-center" style="width: 17rem;font-family: 'Courier New', Courier, monospace;">Để có thể trải nghiệm hết dịch vụ của chúng tôi</p>
         </div>
         <!-------------------- ------ Right Box ---------------------------->
 
@@ -133,7 +134,8 @@
                         <a class="small" asp-action="ForgotPassword">Quên mật khẩu?</a>
                     </div>
                     <div class="text-center">
-                        <a class="small" asp-action="Register" asp-route-returnurl="@ViewData["ReturnUrl"]">Chưa có tài khoản? Đăng ký</a>
+                        <p>Chưa có tài khoản?<a  asp-action="Register" asp-route-returnurl="@ViewData["ReturnUrl"]">Đăng ký</a></p>
+                       
                     </div>
 
 

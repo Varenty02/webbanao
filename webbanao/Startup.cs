@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,6 +15,7 @@ using System.Security.Policy;
 using System.Threading.Tasks;
 using webbanao.Data;
 using webbanao.ExtendMethods;
+using webbanao.Menu;
 using webbanao.Models;
 using webbanao.Services;
 
@@ -100,7 +102,14 @@ namespace webbanao
                     // .AddMicrosoftAccount()
                     ;
             services.AddSingleton<IdentityErrorDescriber, AppIdentityErrorDescriber>();
-           
+            services.AddAuthorization(options => {
+                options.AddPolicy("ViewManageMenu", builder => {
+                    builder.RequireAuthenticatedUser();
+                    builder.RequireRole(RoleName.Administrator);
+                });
+            });
+            services.AddTransient<IActionContextAccessor, ActionContextAccessor>();
+            services.AddTransient<AdminSidebarService>();
 
 
         }

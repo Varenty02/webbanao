@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using webbanao.Models.Blog;
 namespace webbanao.Models
 {
     //webbanao.Models.AppDBContext
@@ -34,10 +35,13 @@ namespace webbanao.Models
                     entityType.SetTableName(tableName.Substring(6));
                 }
             }
-            
+            modelBuilder.Entity<Category>(entity =>
+            {
+                entity.HasIndex(c => c.Slug);
+            });
         }
         public DbSet<ContactModel> Contacts { get; set; }
 
-
+        public DbSet<Category> Categories { get; set; }
     }
 }

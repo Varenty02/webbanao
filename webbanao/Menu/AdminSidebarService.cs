@@ -13,6 +13,7 @@ namespace webbanao.Menu {
 
         public AdminSidebarService(IUrlHelperFactory factory, IActionContextAccessor action)
         {
+            
             UrlHelper = factory.GetUrlHelper(action.ActionContext);
             // Khoi tao cac muc sidebar
 

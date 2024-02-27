@@ -144,18 +144,56 @@ namespace webbanao.Areas.Blog.Controllers
             {
                 return NotFound();
             }
+            bool canUpdate = true;
+            if (category.ParentCategoryId==category.Id)
+            {
+                ModelState.AddModelError(string.Empty,"Phải chọn danh mục cha khác");
+                canUpdate=false;
+                
+            }
 
-            if (ModelState.IsValid)
+            if (canUpdate && category.ParentCategoryId != null)
+            {
+                var cateChilds = (from c in _context.Categories select c).Include(c => c.ChildrenCategory).ToList().Where(c=>c.ParentCategoryId==category.Id);
+                
+                Func<List<Category>,bool> checkCateId = null;
+                checkCateId = (cates) =>
+                {
+                    foreach(var cate in cates)
+                    {
+                        if (cate.Id == category.ParentCategoryId)
+                        {
+                            canUpdate = false;
+                            ModelState.AddModelError(string.Empty, "Phải chọn danh mục khác cha");
+                            return false;
+                        }
+                        else if(cate.ChildrenCategory!=null)
+                        {
+                            return checkCateId(cate.ChildrenCategory.ToList()); 
+                        }
+                    }
+                    return true;
+                };
+                checkCateId(cateChilds.ToList());
+            }
+            if (canUpdate&&ModelState.IsValid)
             {
                 try
                 {
+                    if (category.ParentCategoryId == -1)
+                    {
+                        category.ParentCategoryId = null;
+                        
+                    }
+                    var dtc = _context.Categories.FirstOrDefault(c=>c.Id==id);
+                    _context.Entry(dtc).State = EntityState.Detached;
                     _context.Update(category);
                     await _context.SaveChangesAsync();
+
                 }
-                catch (DbUpdateConcurrencyException)
+                catch(DbUpdateConcurrencyException)
                 {
-                    if (!CategoryExists(category.Id))
-                    {
+                    if (!CategoryExists(category.Id)){
                         return NotFound();
                     }
                     else
@@ -163,9 +201,20 @@ namespace webbanao.Areas.Blog.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index");
             }
-            ViewData["ParentCategoryId"] = new SelectList(_context.Categories, "Id", "Slug", category.ParentCategoryId);
+            var query= (from c in  _context.Categories select c).Include(c => c.ChildrenCategory).Include(c => c.ParentCategory);
+            var rootCategories=query.Where(c=>c.ParentCategory==null).ToList();
+            rootCategories.Insert(0, new Category
+            {
+                Id = -1,
+                Title="Không có danh mục cha"
+            }) ;
+            List<Category> listView=new List<Category>();
+            CreateSelectedItem(rootCategories, listView, 0);
+            var selectList = new SelectList(listView, "Id", "Title");
+
+            ViewData["ParentCategoryId"] = selectList;
             return View(category);
         }
 

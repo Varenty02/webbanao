@@ -1,0 +1,14 @@
+﻿@using Microsoft.AspNetCore.Http
+@using Newtonsoft.Json
+@using webbanao.Areas.Product.Services
+
+@inject CartService _cartService;
+
+
+@{
+    var cart = _cartService.GetCartItems();
+
+
+    <div class="nav-item"><a class="text-warning" asp-route="cart" ><i class="fas fa-shopping-cart"></i>(@cart.Count)</a></div>
+    
+}

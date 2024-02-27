@@ -91,14 +91,14 @@ namespace webbanao.Menu {
                         },   
                         new SidebarItem() { 
                                 Type = SidebarItemType.NavItem,
-                                Controller = "Post",
+                                Controller = "Posts",
                                 Action = "Index", 
                                 Area = "Blog",
                                 Title = "Các bài viết"                        
                         }, 
                         new SidebarItem() { 
                                 Type = SidebarItemType.NavItem,
-                                Controller = "Post",
+                                Controller = "Posts",
                                 Action = "Create", 
                                 Area = "Blog",
                                 Title = "Tạo bài viết"                        
@@ -114,28 +114,28 @@ namespace webbanao.Menu {
                     Items = new List<SidebarItem>() {
                         new SidebarItem() { 
                                 Type = SidebarItemType.NavItem,
-                                Controller = "CategoryProduct",
+                                Controller = "CategoryProducts",
                                 Action = "Index", 
                                 Area = "Product",
                                 Title = "Các chuyên mục"                        
                         },
                          new SidebarItem() { 
                                 Type = SidebarItemType.NavItem,
-                                Controller = "CategoryProduct",
+                                Controller = "CategoryProducts",
                                 Action = "Create", 
                                 Area = "Product",
                                 Title = "Tạo chuyên mục"                        
                         },   
                         new SidebarItem() { 
                                 Type = SidebarItemType.NavItem,
-                                Controller = "ProductManage",
+                                Controller = "ProductModels",
                                 Action = "Index", 
                                 Area = "Product",
                                 Title = "Các sản phẩm"                        
                         }, 
                         new SidebarItem() { 
                                 Type = SidebarItemType.NavItem,
-                                Controller = "ProductManage",
+                                Controller = "ProductModels",
                                 Action = "Create", 
                                 Area = "Product",
                                 Title = "Tạo sản phẩm"                        

@@ -7,12 +7,15 @@ using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Policy;
 using System.Threading.Tasks;
+using webbanao.Areas.Product.Services;
 using webbanao.Data;
 using webbanao.ExtendMethods;
 using webbanao.Menu;
@@ -110,6 +113,7 @@ namespace webbanao
             });
             services.AddTransient<IActionContextAccessor, ActionContextAccessor>();
             services.AddTransient<AdminSidebarService>();
+            services.AddTransient<CartService>();
 
 
         }
@@ -129,6 +133,14 @@ namespace webbanao
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseStaticFiles(new StaticFileOptions()
+            {
+                FileProvider = new PhysicalFileProvider(
+                    Path.Combine(Directory.GetCurrentDirectory(), "Uploads")
+                ),
+                RequestPath = "/contents"
+            });
+
             app.UseSession();
             app.AddStatusCodePage();
             app.UseRouting();

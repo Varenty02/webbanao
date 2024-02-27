@@ -1,0 +1,68 @@
+﻿@{
+    Layout = "_LayoutProductView.cshtml";
+}
+@model List<webbanao.Models.Product.ProductModel>
+
+@foreach(var productItem in Model)
+{
+    var srcImg = "";
+    if (productItem.Photos.Any())
+    {
+        srcImg = $"/contents/Products/{productItem.Photos.FirstOrDefault().FileName}";
+    }
+    <div class="col-md-3">
+        <div class="product-box">
+            <div class="product-inner-box position-relative">
+                <div class="icons position-absolute">
+                    <a href="" class="text-decoration-none text-dark"><i class="fas fa-heart"></i></a>
+                    <a href="" class="text-decoration-none text-dark"><i class="fas fa-eye"></i></a>
+                </div>
+                <div class="onsale position-absolute top-0 start-0">
+                    <span class="badge rounded-0"><i class="fal fa-long-arrow-down"></i>29%</span>
+                </div>
+                <img src="@srcImg" alt="image-product" class="img-fluid" />
+                <div class="cart-btn">
+                    <a asp-route-productid="@productItem.ProductID" asp-action="AddToCart" class=" add-to-cart btn btn-light shadow-sm rounded-pill">Add to Cart</a>
+                </div>
+            </div>
+            
+            <div class="product-info">
+                <div class="product-name">
+                    <h3>@productItem.Title</h3>
+                </div>
+                <div class="product-price">
+                    $<span>@productItem.Price</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+}
+ @* @section Scripts {
+     <script>
+             $(".add-to-cart").click(function () {
+                 var productid = $(this).data("productid");
+                 var quantity = $("#quantity-" + productid).val();
+
+                 // Tạo một đối tượng chứa dữ liệu sẽ gửi lên server
+                 var data = {
+                     quantity: quantity
+                 };
+
+                 // Gửi yêu cầu AJAX đến server
+                 $.ajax({
+                 url: '/addcart/' + productid, // Địa chỉ URL của endpoint trên server nhận yêu cầu
+                     method: 'POST', // Phương thức HTTP (ví dụ: POST, GET, PUT, DELETE, v.v.)
+                     data: data, // Dữ liệu gửi đi
+                     success: function (response) {
+                         console.log(response);
+                     },
+                     error: function (xhr, status, error) {
+                         // Xử lý lỗi (nếu có)
+                         console.error(error);
+                     }
+                 });
+             })
+     </script>
+ } *@
+

@@ -1,0 +1,113 @@
+﻿@model List<webbanao.Areas.Product.Models.CartItem>
+@{
+    Layout = "_Layout";
+    var checkoutForm = new webbanao.Areas.Product.Controllers.ViewProductController.CheckoutForm();
+}
+<h2>GIỎ HÀNG</h2>
+
+@if (Model.Count > 0)
+{
+    decimal total = 0;
+    int stt = 1;
+
+    <table class="table">
+        <tr>
+            <th>#</th>
+            <th>Sản phẩm</th>
+            <th>Giá</th>
+            <th>Số lượng</th>
+            <th>Thành tiền</th>
+            <th></th>
+        </tr>
+        @foreach (var cartitem in Model)
+        {
+            var thanhtien = cartitem.quantity * cartitem.product.Price;
+            total += thanhtien;
+
+            <tr>
+                <td>@(stt++)</td>
+                <td>@cartitem.product.Title</td>
+                <td>@(cartitem.product.Price.ToString("n0"))</td>
+                <td><input asp-for="@cartitem.quantity" id="@($"quantity-{cartitem.product.ProductID}")" /></td>
+                <td>@(thanhtien.ToString("n0"))</td>
+                <td>
+                    <button class="btn btn-success updatecartitem"
+                            data-productid="@cartitem.product.ProductID">
+                        Cập nhật
+                    </button>
+                    <a asp-route="removecart" asp-route-productid="@cartitem.product.ProductID"
+                       class="btn btn-danger">Xóa</a>
+                </td>
+            </tr>
+        }
+        <tr>
+            <td colspan="4" class="text-right">Tổng tiền</td>
+            <td>@(total.ToString("n0"))</td>
+            <td></td>
+        </tr>
+    </table>
+
+    <form asp-action="checkout" method="post">
+        <div class="form-group">
+            <label asp-for="@checkoutForm.Name"></label>
+            <input asp-for="@checkoutForm.Name" class="form-control" />
+            <span asp-validation-for="@checkoutForm.Name" class="text-danger"></span>
+        </div>
+        <div class ="form-group">
+            <label asp-for="@checkoutForm.Description"></label>
+            <input asp-for="@checkoutForm.Description" class="form-control" />
+            <span asp-validation-for="@checkoutForm.Description" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="@checkoutForm.Address"></label>
+            <input asp-for="@checkoutForm.Address" class="form-control"  />
+            <span asp-validation-for="@checkoutForm.Address" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="@checkoutForm.PhoneNumber"></label>
+            <input asp-for="@checkoutForm.PhoneNumber" class="form-control" />
+            <span asp-validation-for="@checkoutForm.PhoneNumber" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-success">Checkout</button>
+        </div>
+    </form>
+    @section Scripts {
+    
+        <script>
+            $(document).ready(function () {
+                $(".updatecartitem").click(function () {
+                    
+                    var productid = $(this).data("productid");
+                    var quantity = parseInt($("#quantity-" + productid).val());
+                    var formData = new FormData();
+                    formData.append("productid", productid);
+                    formData.append("quantity", quantity);
+                    console.log(this);
+                    var urlupdatecart = "@Url.RouteUrl("updatecart")";
+                    var urlcart = "@Url.RouteUrl("cart")";
+                    $.ajax({
+                        type: "POST",
+                        url: urlupdatecart,
+                        data: formData,
+                        contentType: false,
+                        processData: false,
+                        success: function (result) {
+                            window.location.href = urlcart;
+                        }, 
+                        error: function (xhr, status, error) {
+                            // Xử lý lỗi (nếu có)
+                            console.error(error);
+                        }
+                    });
+                });
+            });
+        </script>
+    }
+    
+
+}
+else
+{
+    <p class="alert alert-danger">Giỏ hàng trống</p>
+}

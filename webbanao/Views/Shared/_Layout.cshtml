@@ -24,12 +24,16 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Chính sách</a>
+                            <a class="nav-link text-dark" asp-area="Contact" asp-controller="Contact" asp-action="SendContact">Liên hệ</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Contact" asp-controller="Contact" asp-action="index">Liên hệ</a>
+                            <a class="nav-link text-dark" asp-area="Blog" asp-controller="ViewPost" asp-action="index">Bài viết</a>
+                        </li
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Product" asp-controller="ViewProduct" asp-action="index">Sản phẩm</a>
                         </li>
                     </ul>
+                    <partial name="_CartPartial"/>
                     <partial name="_LoginPartial"/>
                     <partial name="_MenuManagePartial"/>
                 </div>

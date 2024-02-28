@@ -31,13 +31,11 @@ namespace webbanao.Menu {
 
         public List<SidebarItem> Items { get; set; }
 
-        public string collapseID { get; set; }
-
         public string GetLink(IUrlHelper urlHelper)
         {
             return urlHelper.Action(Action, Controller, new { area = Area});
         }
-
+        //menu-is-opening menu-open -->active
         public string RenderHtml(IUrlHelper urlHelper)
         {
             var html = new StringBuilder();
@@ -60,15 +58,16 @@ namespace webbanao.Menu {
                     var icon = (AwesomeIcon != null) ? 
                                 $"<i class=\"{AwesomeIcon}\"></i>":
                                 "";
-                    var cssClass = "nav-item";   
-                    if (IsActive) cssClass += " active";        
+                    var cssClass = "nav-item";
+                    var cssClassActive = "";
+                    if (IsActive) cssClassActive= " active";        
 
 
                     html.Append(@$"
                         <li class=""{cssClass}"">
-                            <a class=""nav-link"" href=""{url}"">
+                            <a class=""nav-link {cssClassActive}"" href=""{url}"">
                                 {icon}
-                                <span>{Title}</span></a>
+                                <p>{Title}</p></a>
                          </li>                    
                     ");
 
@@ -76,45 +75,41 @@ namespace webbanao.Menu {
                 else
                 {
                     // Items != null
-                    var cssClass = "nav-item";   
-                    if (IsActive) cssClass += " active";  
-
+                    var classLiShow = "";
+                    var classItemAtive = "";
+                    if (IsActive)
+                    {
+                        classLiShow = " menu-open";
+                        classItemAtive = "active";
+                    }
                     var icon = (AwesomeIcon != null) ? 
                                 $"<i class=\"{AwesomeIcon}\"></i>":
                                 ""; 
-
-                    var collapseCss = "collapse";     
-                    if (IsActive)  collapseCss += " show";    
 
                     var itemMenu = "";
 
                     foreach (var item in Items) 
                     {
                         var urlItem = item.GetLink(urlHelper);
-                        var cssItem = "collapse-item";
+                        var cssItem = "nav-link";
                         if (item.IsActive) cssItem += " active";
-                        itemMenu  += $"<a class=\"{cssItem}\" href=\"{urlItem}\">{item.Title}</a>";
+                        itemMenu  += $"<li class=\"nav-item\"><a class=\"{cssItem}\" href=\"{urlItem}\"><p>{item.Title}</p></a></li>";
                     }
-
                     html.Append(@$"
                     
-                        <li class=""{cssClass}"">
-                            <a class=""nav-link collapsed"" href=""#"" data-toggle=""collapse"" data-target=""#{collapseID}""
-                                aria-expanded=""true"" aria-controls=""{collapseID}"">
+                        <li class=""nav-item {classLiShow}"">
+                            <a class=""nav-link {classItemAtive}"" href=""#"">
                                 {icon}
-                                <span>{Title}</span>
+                                <p>{Title}<i class=""right fas fa-angle-left""></i></p>
                             </a>
 
-                            <div id=""{collapseID}"" class=""{collapseCss}"" aria-labelledby=""headingTwo"" data-parent=""#accordionSidebar"">
-                                <div class=""bg-white py-2 collapse-inner rounded"">
+                            <ul class=""nav nav-treeview"">
                                     {itemMenu}
-                                </div>
-                            </div>
+                            </ul>
 
                         </li>                    
                     
                     ");
-
 
                 }
             } 

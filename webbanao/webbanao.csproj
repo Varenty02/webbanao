@@ -10,6 +10,14 @@
     <Content Remove="wwwroot\lib\ckfinder\**" />
     <EmbeddedResource Remove="wwwroot\lib\ckfinder\**" />
     <None Remove="wwwroot\lib\ckfinder\**" />
+	  <None Include="wwwroot\**">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="wwwroot\images\hero\hero-2.jpg" />
+    <Content Remove="wwwroot\images\hero\hero-3.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -44,7 +52,6 @@
     <Folder Include="Areas\Product\Data\" />
     <Folder Include="Migrations\" />
     <Folder Include="Uploads\Products\" />
-    <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -153,6 +160,12 @@
     <None Include="wwwroot\lib\ckeditor\skins\moono-lisa\readme.md" />
     <None Include="wwwroot\lib\ckeditor\styles.js" />
     <None Include="wwwroot\lib\ckeditor\vendor\promise.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="wwwroot\images\hero-3.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

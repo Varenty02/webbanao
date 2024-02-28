@@ -36,7 +36,15 @@ body {
 	font-family: "Nunito Sans", sans-serif;
 	-webkit-font-smoothing: antialiased;
 }
-
+.img-product{
+	max-width:100px;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+	-webkit-appearance: none;
+	appearance: none;
+	margin: 0; /* Tùy chỉnh margin nếu cần */
+}
 h1,
 h2,
 h3,
@@ -1196,9 +1204,9 @@ ol {
 	background: transparent;
 	position: absolute;
 	right: 0;
-	padding: 0 15px;
+	padding: 9 39px;
 	top: 0;
-	height: 100%;
+	width: 100%;
 }
 
 .shop__sidebar__accordion .card {
@@ -2471,12 +2479,9 @@ ol {
 	letter-spacing: 2px;
 	text-transform: uppercase;
 	background: #111111;
-	padding: 0 30px;
+	padding: 9px 39px;
 	border: none;
-	position: absolute;
-	right: 0;
-	top: 0;
-	height: 100%;
+	width: 100%;
 }
 
 .cart__total {

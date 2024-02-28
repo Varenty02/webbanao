@@ -3,7 +3,6 @@
 @inject AdminSidebarService _AdminSidebarService
 @{
     ViewData["Title"] = "Edit";
-    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
     var list = ViewData["Categories"] as MultiSelectList;
 }
 
@@ -72,7 +71,7 @@
 }
 
 @{
-    _AdminSidebarService.SetActive("Posts", "Edit", "Blog");
+    _AdminSidebarService.SetActive("Posts", "Index", "Blog");
 }
 
 @section Sidebar

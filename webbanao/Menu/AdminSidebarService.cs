@@ -15,10 +15,7 @@ namespace webbanao.Menu {
         {
             
             UrlHelper = factory.GetUrlHelper(action.ActionContext);
-            // Khoi tao cac muc sidebar
-
-            Items.Add(new SidebarItem() { Type = SidebarItemType.Divider});
-            Items.Add(new SidebarItem() { Type = SidebarItemType.Heading, Title = "Quản lý chung"});
+            
         
             Items.Add(new SidebarItem() { 
                     Type = SidebarItemType.NavItem,
@@ -36,13 +33,11 @@ namespace webbanao.Menu {
                     Title = "Quản lý liên hệ",
                     AwesomeIcon = "far fa-address-card"
                 });
-            Items.Add(new SidebarItem() { Type = SidebarItemType.Divider});
 
             Items.Add(new SidebarItem() { 
                     Type = SidebarItemType.NavItem,
                     Title = "Phân quyền & thành viên",
                     AwesomeIcon = "far fa-folder",
-                    collapseID = "role",
                     Items = new List<SidebarItem>() {
                         new SidebarItem() { 
                                 Type = SidebarItemType.NavItem,
@@ -56,7 +51,7 @@ namespace webbanao.Menu {
                                 Controller = "Role",
                                 Action = "Create", 
                                 Area = "Identity",
-                                Title = "Tạo role mới"                        
+                                Title = "Tạo vai trò mới"                        
                         },
                         new SidebarItem() { 
                                 Type = SidebarItemType.NavItem,
@@ -67,13 +62,11 @@ namespace webbanao.Menu {
                         },
                     },
                 });
-                Items.Add(new SidebarItem() { Type = SidebarItemType.Divider});
                 
                 Items.Add(new SidebarItem() { 
                     Type = SidebarItemType.NavItem,
                     Title = "Quản lý bài viết",
                     AwesomeIcon = "far fa-folder",
-                    collapseID = "blog",
                     Items = new List<SidebarItem>() {
                         new SidebarItem() { 
                                 Type = SidebarItemType.NavItem,
@@ -105,12 +98,10 @@ namespace webbanao.Menu {
                         },                                   
                     },
                 });
-                Items.Add(new SidebarItem() { Type = SidebarItemType.Divider});
                 Items.Add(new SidebarItem() { 
                     Type = SidebarItemType.NavItem,
                     Title = "Quản lý sản phẩm",
                     AwesomeIcon = "far fa-folder",
-                    collapseID = "product",
                     Items = new List<SidebarItem>() {
                         new SidebarItem() { 
                                 Type = SidebarItemType.NavItem,
@@ -142,7 +133,15 @@ namespace webbanao.Menu {
                         },                                   
                     },
                 });
-
+            Items.Add(new SidebarItem()
+            {
+                Type = SidebarItemType.NavItem,
+                Controller = "OrderModels",
+                Action = "Index",
+                Area = "Order",
+                Title = "Quản lý đơn hàng",
+                AwesomeIcon = "far fa-folder"
+            });
 
         }
 

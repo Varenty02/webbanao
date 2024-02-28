@@ -6,43 +6,7 @@
 }
 @if (result.Succeeded)
 {
-    <div class="dropdown">
-        <a class="btn btn-outline-danger dropdown-toggle" href="#"
-           id="manageddropdownmenu" data-toggle="dropdown">
-            Manage
-        </a>
-        <div class="dropdown-menu" aria-labelledby="manageddropdownmenu">
-            <a class="dropdown-item" asp-action="Index" asp-controller="DbManage" asp-area="Database">
-                Cơ sở dữ liệu
-            </a>
-            <a class="dropdown-item" asp-action="Index" asp-controller="Contact" asp-area="Contact">
-                Quản lý liên hệ
-            </a>
-            <a class="dropdown-item" asp-action="Index" asp-controller="Role" asp-area="Identity">
-                Quản lý vai trò
-            </a>
-            <a class="dropdown-item" asp-action="Index" asp-controller="User" asp-area="Identity">
-                Quản lý thành viên
-            </a>
-            <a class="dropdown-item" asp-action="Index" asp-controller="Category" asp-area="Blog">
-                Quản lý danh mục
-            </a>
-            <a class="dropdown-item" asp-action="Index" asp-controller="Posts" asp-area="Blog">
-                Quản lý bài viết
-            </a>
-            <a class="dropdown-item" asp-action="Index" asp-controller="CategoryProducts" asp-area="Product">
-                Quản lý danh mục sản phẩm
-            </a>
-            <a class="dropdown-item" asp-action="Index" asp-controller="ProductModels" asp-area="Product">
-                Quản lý sản phẩm
-            </a>
-            <a class="dropdown-item" asp-action="Index" asp-controller="OrderModels" asp-area="Order">
-                Quản lý sản phẩm
-            </a>
-        </div>
-    </div>
-}
-else
-{
-    
+    <a class="nav-link text-light" asp-action="Index" asp-controller="OrderModels" asp-area="Order">
+        <i class="fas fa-cog"></i>  Quản trị
+    </a>
 }

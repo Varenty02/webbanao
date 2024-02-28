@@ -1,8 +1,9 @@
 ﻿@model webbanao.Models.Order.OrderModel
-
+@using webbanao.Menu
+@inject AdminSidebarService _adminSidebarService
 @{
     ViewData["Title"] = "Edit";
-    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    Layout = "~/Views/Shared/_LayoutAdminLTE.cshtml";
 }
 
 <h1>Edit</h1>
@@ -52,4 +53,12 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+@{
+    _adminSidebarService.SetActive("OrderModels", "Index", "Order");
+}
+
+@section Sidebar
+{
+    @Html.Raw(_adminSidebarService.renderHtml())
 }

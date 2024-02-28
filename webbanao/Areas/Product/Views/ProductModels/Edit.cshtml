@@ -1,9 +1,9 @@
 ﻿@model webbanao.Areas.Product.Models.CreateProductModel
 @using webbanao.Menu
-@inject AdminSidebarService _AdminSidebarService
+@inject AdminSidebarService _adminSidebarService
 @{
     ViewData["Title"] = "Edit";
-    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    Layout = "~/Views/Shared/_LayoutAdminLTE.cshtml";
     var list = ViewData["Categories"] as MultiSelectList;
 }
 
@@ -198,10 +198,10 @@
 
 }
 @{
-    _AdminSidebarService.SetActive("ProductModels", "Index", "Product");
+    _adminSidebarService.SetActive("ProductModels", "Index", "Product");
 }
 
 @section Sidebar
 {
-    @Html.Raw(_AdminSidebarService.renderHtml())
+    @Html.Raw(_adminSidebarService.renderHtml())
 }

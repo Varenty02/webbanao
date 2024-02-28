@@ -1,8 +1,9 @@
 ﻿@model webbanao.Models.Order.OrderModel
-
+@using webbanao.Menu
+@inject AdminSidebarService _adminSidebarService
 @{
     ViewData["Title"] = "Delete";
-    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    Layout = "~/Views/Shared/_LayoutAdminLTE.cshtml";
 }
 
 <h1>Delete</h1>
@@ -56,3 +57,11 @@
         <a asp-action="Index">Back to List</a>
     </form>
 </div>
+@{
+    _adminSidebarService.SetActive("OrderModels", "Index", "Order");
+}
+
+@section Sidebar
+{
+    @Html.Raw(_adminSidebarService.renderHtml())
+}

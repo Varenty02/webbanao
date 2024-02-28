@@ -169,7 +169,13 @@ namespace webbanao.Areas.Product.Controllers
         [Route("/cart", Name = "cart")]
         public IActionResult Cart()
         {
-            return View(_cartService.GetCartItems());
+            var carts = _cartService.GetCartItems();
+            foreach (var cartitem in carts)
+            {
+                cartitem.product=_context.Products.Include(p=>p.Photos).Where(p=>p.ProductID==cartitem.product.ProductID).FirstOrDefault();
+            }
+            
+            return View(carts.ToList());
         }
 
         /// xóa item trong cart

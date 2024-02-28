@@ -1,8 +1,9 @@
 ﻿@model IEnumerable<webbanao.Models.Order.OrderModel>
-
+@using webbanao.Menu
+@inject AdminSidebarService _adminSidebarService
 @{
     ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    Layout = "~/Views/Shared/_LayoutAdminLTE.cshtml";
 }
 
 <h1>Index</h1>
@@ -66,3 +67,11 @@
 }
     </tbody>
 </table>
+@{
+    _adminSidebarService.SetActive("OrderModels", "Index", "Order");
+}
+
+@section Sidebar
+{
+    @Html.Raw(_adminSidebarService.renderHtml())
+}

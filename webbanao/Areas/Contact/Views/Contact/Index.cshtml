@@ -1,15 +1,13 @@
 ﻿@model IEnumerable<webbanao.Models.ContactModel>
-
+@using webbanao.Menu
+@inject AdminSidebarService _adminSidebarService
 @{
     ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LayoutAdminLTE.cshtml";
 }
 
 <h1>Danh sách liên hệ</h1>
 
-<p>
-    <a asp-action="SendContact" asp-area="Contact" asp-controller="Contact">Tạo mới liên hệ</a>
-</p>
 <table class="table">
     <thead>
         <tr>
@@ -52,3 +50,11 @@
 }
     </tbody>
 </table>
+@{
+    _adminSidebarService.SetActive("Contact", "Index", "Contact");
+}
+
+@section Sidebar
+{
+    @Html.Raw(_adminSidebarService.renderHtml())
+}

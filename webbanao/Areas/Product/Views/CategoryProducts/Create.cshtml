@@ -1,8 +1,9 @@
 ﻿@model webbanao.Models.Product.CategoryProduct
-
+@using webbanao.Menu
+@inject AdminSidebarService _adminSidebarService
 @{
     ViewData["Title"] = "Create";
-    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    Layout = "~/Views/Shared/_LayoutAdminLTE.cshtml";
 }
 
 <h1>Create</h1>
@@ -45,4 +46,12 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+@{
+    _adminSidebarService.SetActive("CategoryProducts", "Create", "Product");
+}
+
+@section Sidebar
+{
+    @Html.Raw(_adminSidebarService.renderHtml())
 }

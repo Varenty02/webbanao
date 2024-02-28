@@ -7,8 +7,5 @@
 
 @{
     var cart = _cartService.GetCartItems();
-
-
-    <div class="nav-item"><a class="text-warning" asp-route="cart" ><i class="fas fa-shopping-cart"></i>(@cart.Count)</a></div>
-    
+    <a class="text-warning" asp-route="cart"><img src="~/images/icon/cart.png" alt=""> <span>@cart.Count</span></a>
 }

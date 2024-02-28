@@ -1,8 +1,10 @@
-﻿@{
+﻿@using webbanao.Menu
+@inject AdminSidebarService _adminSidebarService
+@{
     ViewData["Title"] = "Xóa database";
 }
 <h1>@ViewData["Title"]</h1>
-<p class="alert alert-danger">
+<p >
     Có chắc chắn xóa ?
 </p>
 <form method="post">
@@ -10,3 +12,11 @@
     <hr />
     <a class="btn btn-primary" asp-action="index">Quản lý db</a>
 </form>
+@{
+    _adminSidebarService.SetActive("DbManage", "Index", "Database");
+}
+
+@section Sidebar
+{
+    @Html.Raw(_adminSidebarService.renderHtml())
+}

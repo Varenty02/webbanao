@@ -1,6 +1,6 @@
 ﻿@model List<webbanao.Areas.Product.Models.CartItem>
 @{
-    Layout = "_Layout";
+    Layout = "_UserLayout";
     var checkoutForm = new webbanao.Areas.Product.Controllers.ViewProductController.CheckoutForm();
 }
 <h2>GIỎ HÀNG</h2>
@@ -9,69 +9,103 @@
 {
     decimal total = 0;
     int stt = 1;
+    <section class="shopping-cart spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="shopping__cart__table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Quantity</th>
+                                    <th>Total</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var cartitem in Model)
+                                {
+                                    var thanhtien = cartitem.quantity * cartitem.product.Price;
+                                    total += thanhtien;
+                                    <tr>
+                                        <td class="product__cart__item">
+                                            <div class="product__cart__item__pic">
+                                                <img class="img-product" src="contents/Products/@cartitem.product.Photos.First().FileName" alt="">
+                                            </div>
+                                            <div class="product__cart__item__text">
+                                                <h6>@cartitem.product.Title</h6>
+                                                <h5>@cartitem.product.Price</h5>
+                                            </div>
+                                        </td>
+                                        <td class="quantity__item">
+                                            <div class="quantity">
+                                                <div class="pro-qty-2">
+                                                    <input asp-for="@cartitem.quantity" id="@($"quantity-{cartitem.product.ProductID}")" />
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="cart__price">$ @thanhtien</td>
+                                        <td class="cart__close"><i class="fa fa-close"></i></td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="continue__btn">
+                                <a href="#">Continue Shopping</a>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="continue__btn update__btn">
+                                <a href="#"><i class="fa fa-spinner"></i> Update cart</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="cart__discount">
+                        <h6>Discount codes</h6>
 
-    <table class="table">
-        <tr>
-            <th>#</th>
-            <th>Sản phẩm</th>
-            <th>Giá</th>
-            <th>Số lượng</th>
-            <th>Thành tiền</th>
-            <th></th>
-        </tr>
-        @foreach (var cartitem in Model)
-        {
-            var thanhtien = cartitem.quantity * cartitem.product.Price;
-            total += thanhtien;
+                        <form asp-action="checkout" method="post">
+                            <div class="form-group">
+                                <label asp-for="@checkoutForm.Name"></label>
+                                <input asp-for="@checkoutForm.Name" class="form-control" />
+                                <span asp-validation-for="@checkoutForm.Name" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="@checkoutForm.Description"></label>
+                                <input asp-for="@checkoutForm.Description" class="form-control" />
+                                <span asp-validation-for="@checkoutForm.Description" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="@checkoutForm.Address"></label>
+                                <input asp-for="@checkoutForm.Address" class="form-control" />
+                                <span asp-validation-for="@checkoutForm.Address" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="@checkoutForm.PhoneNumber"></label>
+                                <input asp-for="@checkoutForm.PhoneNumber" class="form-control" />
+                                <span asp-validation-for="@checkoutForm.PhoneNumber" class="text-danger"></span>
+                            </div>
+                            <div class="cart__total">
+                                <h6>Cart total</h6>
+                                <ul>
+                                    <li>Subtotal <span>$ @total</span></li>
+                                    <li>Total <span>$ @total</span></li>
+                                </ul>
+                                <button type="submit">Checkout</button>
+                            </div>
+                        </form>
+                    </div>
 
-            <tr>
-                <td>@(stt++)</td>
-                <td>@cartitem.product.Title</td>
-                <td>@(cartitem.product.Price.ToString("n0"))</td>
-                <td><input asp-for="@cartitem.quantity" id="@($"quantity-{cartitem.product.ProductID}")" /></td>
-                <td>@(thanhtien.ToString("n0"))</td>
-                <td>
-                    <button class="btn btn-success updatecartitem"
-                            data-productid="@cartitem.product.ProductID">
-                        Cập nhật
-                    </button>
-                    <a asp-route="removecart" asp-route-productid="@cartitem.product.ProductID"
-                       class="btn btn-danger">Xóa</a>
-                </td>
-            </tr>
-        }
-        <tr>
-            <td colspan="4" class="text-right">Tổng tiền</td>
-            <td>@(total.ToString("n0"))</td>
-            <td></td>
-        </tr>
-    </table>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <form asp-action="checkout" method="post">
-        <div class="form-group">
-            <label asp-for="@checkoutForm.Name"></label>
-            <input asp-for="@checkoutForm.Name" class="form-control" />
-            <span asp-validation-for="@checkoutForm.Name" class="text-danger"></span>
-        </div>
-        <div class ="form-group">
-            <label asp-for="@checkoutForm.Description"></label>
-            <input asp-for="@checkoutForm.Description" class="form-control" />
-            <span asp-validation-for="@checkoutForm.Description" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="@checkoutForm.Address"></label>
-            <input asp-for="@checkoutForm.Address" class="form-control"  />
-            <span asp-validation-for="@checkoutForm.Address" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="@checkoutForm.PhoneNumber"></label>
-            <input asp-for="@checkoutForm.PhoneNumber" class="form-control" />
-            <span asp-validation-for="@checkoutForm.PhoneNumber" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <button type="submit" class="btn btn-success">Checkout</button>
-        </div>
-    </form>
     @section Scripts {
     
         <script>

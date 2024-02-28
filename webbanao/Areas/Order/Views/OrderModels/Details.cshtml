@@ -1,8 +1,9 @@
 ﻿@model webbanao.Models.Order.OrderModel
-
+@using webbanao.Menu
+@inject AdminSidebarService _adminSidebarService
 @{
     ViewData["Title"] = "Details";
-    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    Layout = "~/Views/Shared/_LayoutAdminLTE.cshtml";
 }
 
 <h1>Details</h1>
@@ -104,3 +105,11 @@
     <a asp-action="Edit" asp-route-id="@Model.Id">Chỉnh sửa</a> |
     <a asp-action="Index">Trở về trang chính</a>
 </div>
+@{
+    _adminSidebarService.SetActive("OrderModels", "Index", "Order");
+}
+
+@section Sidebar
+{
+    @Html.Raw(_adminSidebarService.renderHtml())
+}

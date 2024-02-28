@@ -1,8 +1,8 @@
-﻿@model webbanao.Models.Blog.Post
-
+﻿@using webbanao.Menu
+@model webbanao.Models.Blog.Post
+@inject AdminSidebarService _adminSidebarService
 @{
     ViewData["Title"] = "Delete";
-    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
 <h1>Delete</h1>
@@ -68,3 +68,11 @@
         <a asp-action="Index">Back to List</a>
     </form>
 </div>
+@{
+    _adminSidebarService.SetActive("Posts", "Index", "Blog");
+}
+
+@section Sidebar
+{
+    @Html.Raw(_adminSidebarService.renderHtml())
+}

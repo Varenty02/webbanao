@@ -38,31 +38,3 @@
 
     </div>
 }
- @* @section Scripts {
-     <script>
-             $(".add-to-cart").click(function () {
-                 var productid = $(this).data("productid");
-                 var quantity = $("#quantity-" + productid).val();
-
-                 // Tạo một đối tượng chứa dữ liệu sẽ gửi lên server
-                 var data = {
-                     quantity: quantity
-                 };
-
-                 // Gửi yêu cầu AJAX đến server
-                 $.ajax({
-                 url: '/addcart/' + productid, // Địa chỉ URL của endpoint trên server nhận yêu cầu
-                     method: 'POST', // Phương thức HTTP (ví dụ: POST, GET, PUT, DELETE, v.v.)
-                     data: data, // Dữ liệu gửi đi
-                     success: function (response) {
-                         console.log(response);
-                     },
-                     error: function (xhr, status, error) {
-                         // Xử lý lỗi (nếu có)
-                         console.error(error);
-                     }
-                 });
-             })
-     </script>
- } *@
-

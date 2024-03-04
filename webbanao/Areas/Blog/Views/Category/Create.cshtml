@@ -2,12 +2,11 @@
 @model webbanao.Models.Blog.Category
 @inject AdminSidebarService _adminSidebarService
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Tạo danh mục mới";
 }
 
-<h1>Create</h1>
+<h1>@ViewData["Title"]</h1>
 
-<h4>Category</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -40,7 +39,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a class="btn btn-primary" asp-action="Index">Quay lại danh sách</a>
 </div>
 
 @section Scripts {

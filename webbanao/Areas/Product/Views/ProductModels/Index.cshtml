@@ -2,14 +2,14 @@
 @using webbanao.Menu
 @inject AdminSidebarService _adminSidebarService
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Danh sách sản phẩm";
     Layout = "~/Views/Shared/_LayoutAdminLTE.cshtml";
 }
 
-<h1>Index</h1>
+<h1>@ViewData["Title"]</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a class="btn btn-success" asp-action="Create">Tạo mới</a>
 </p>
 <table class="table">
     <thead>
@@ -33,12 +33,6 @@
                 @Html.DisplayNameFor(model => model.Author)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DateCreated)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DateUpdated)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Price)
             </th>
             <th></th>
@@ -48,7 +42,8 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Title)
+                    <a asp-action="Details" asp-route-id="@item.ProductID"> @Html.DisplayFor(modelItem => item.Title)</a> 
+               
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Description)
@@ -66,18 +61,12 @@
                 @Html.DisplayFor(modelItem => item.Author.Id)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DateCreated)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateUpdated)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.ProductID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ProductID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ProductID">Delete</a>
+                <a class="btn btn-success" asp-action="Edit" asp-route-id="@item.ProductID">Sửa</a> 
+                
+                    <a class="btn btn-danger"  asp-action="Delete" asp-route-id="@item.ProductID">Xóa</a>
             </td>
         </tr>
 }

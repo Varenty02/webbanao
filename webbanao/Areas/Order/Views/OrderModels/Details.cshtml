@@ -2,14 +2,13 @@
 @using webbanao.Menu
 @inject AdminSidebarService _adminSidebarService
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Chi tiết sản phẩm";
     Layout = "~/Views/Shared/_LayoutAdminLTE.cshtml";
 }
 
-<h1>Details</h1>
+<h1>@ViewData["Title"]</h1>
 
 <div>
-    <h4>OrderModel</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -102,8 +101,8 @@
     </tbody>
 </table>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Chỉnh sửa</a> |
-    <a asp-action="Index">Trở về trang chính</a>
+    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.Id">Chỉnh sửa</a> |
+    <a class ="btn btn-primary" asp-action="Index">Trở về trang chính</a>
 </div>
 @{
     _adminSidebarService.SetActive("OrderModels", "Index", "Order");

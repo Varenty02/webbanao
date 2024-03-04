@@ -2,13 +2,13 @@
 @model IEnumerable<webbanao.Models.Blog.Post>
 @inject AdminSidebarService _AdminSidebarService
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Danh sách bài viết";
 }
 
-<h1>Index</h1>
+<h1>@ViewData["Title"]</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a class="btn btn-success" asp-action="Create">Tạo mới</a>
 </p>
 <table class="table">
     <thead>
@@ -23,7 +23,7 @@
                 @Html.DisplayNameFor(model => model.Slug)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Content)
+                @Html.DisplayNameFor(model => model.Author)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Published)
@@ -35,27 +35,28 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                    <a asp-action="Edit" asp-route-id="@item.PostId">@Html.DisplayFor(modelItem => item.Title)</a> |
+                    <a asp-action="Details" asp-route-id="@item.PostId">@Html.DisplayFor(modelItem => item.Title)</a>  
                 <br />
                 <span>@string.Join(",",item.PostCategories.Select(pc=>pc.Category.Title))</span>
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Published)
+                @Html.DisplayFor(modelItem => item.Description)
 
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Author.UserName)
+                @Html.DisplayFor(modelItem => item.Slug)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateCreated)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateUpdated)
-            </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Author.UserName)
+
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Published)
+                </td>
             <td>
                 
-                <a asp-action="Details" asp-route-id="@item.PostId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.PostId">Delete</a>
+                <a class="btn-success btn" asp-action="Edit" asp-route-id="@item.PostId">Edits</a>
+                <a class="btn-danger btn" asp-action="Delete" asp-route-id="@item.PostId">Delete</a>
             </td>
         </tr>
 }

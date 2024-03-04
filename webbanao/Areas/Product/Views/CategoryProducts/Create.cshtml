@@ -2,14 +2,11 @@
 @using webbanao.Menu
 @inject AdminSidebarService _adminSidebarService
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Tạo mới danh mục";
     Layout = "~/Views/Shared/_LayoutAdminLTE.cshtml";
 }
 
-<h1>Create</h1>
-
-<h4>CategoryProduct</h4>
-<hr />
+<h1>@ViewData["Title"]</h1>
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
@@ -34,14 +31,14 @@
                 <select asp-for="ParentCategoryId" class ="form-control" asp-items="ViewBag.ParentCategoryId"></select>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Tạo" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a class="btn btn-primary" asp-action="Index">Quay lại danh sách</a>
 </div>
 
 @section Scripts {

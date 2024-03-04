@@ -2,14 +2,13 @@
 @model webbanao.Models.Blog.Post
 @inject AdminSidebarService _adminSidebarService
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Xóa bài viết";
 }
 
-<h1>Delete</h1>
+<h1>@ViewData["Title"]</h1>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Bạn có chắc chắn muốn xóa bài viết?</h3>
 <div>
-    <h4>Post</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -64,8 +63,8 @@
     
     <form asp-action="Delete">
         <input type="hidden" asp-for="PostId" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <input type="submit" value="Xóa" class="btn btn-danger" /> |
+        <a asp-action="Index">Quay lại danh sách</a>
     </form>
 </div>
 @{

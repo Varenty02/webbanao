@@ -62,14 +62,14 @@ namespace webbanao.Areas.Identity.Controllers
             if (ModelState.IsValid)
             {
 
-                var result = await _signInManager.PasswordSignInAsync(model.UserNameOrEmail, model.Password, model.RememberMe, lockoutOnFailure: true);
+                var result = await _signInManager.PasswordSignInAsync(model.UserNameOrEmail, model.Password, model.RememberMe, lockoutOnFailure: false);
                 // Tìm UserName theo Email, đăng nhập lại
                 if ((!result.Succeeded) && AppUtilities.IsValidEmail(model.UserNameOrEmail))
                 {
                     var user = await _userManager.FindByEmailAsync(model.UserNameOrEmail);
                     if (user != null)
                     {
-                        result = await _signInManager.PasswordSignInAsync(user.UserName, model.Password, model.RememberMe, lockoutOnFailure: true);
+                        result = await _signInManager.PasswordSignInAsync(user.UserName, model.Password, model.RememberMe, lockoutOnFailure: false);
                     }
                 }
 
